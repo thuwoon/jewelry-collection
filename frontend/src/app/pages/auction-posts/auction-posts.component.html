@@ -1,0 +1,67 @@
+<div class="post-btn-con">
+    <!--<form [formGroup]="searchForm" class="search-form-con">
+      <select class="classic-select" formControlName="gem_type">
+        <option value=''> Select Gem Type </option>
+        <option *ngFor="let type of gemTypes" [value]="type.name">{{type.name}}</option>
+      </select>
+  
+      <select class="classic-select" formControlName="item_type">
+        <option value=''> Select Item Type </option>
+        <option *ngFor="let type of itemTypes" [value]="type.name">{{type.name}}</option>
+      </select>
+      
+      <button *ngIf="searchForm.value.gem_type || searchForm.value.item_type" [disabled]="searchForm.invalid"
+        class="filter-btn cancle-btn" (click)="onCancle()"> <mat-icon>close</mat-icon> </button>
+  
+      <button [disabled]="searchForm.invalid" class="filter-btn" (click)="onSearchAucPost()"> <mat-icon>search</mat-icon>
+      </button>
+  
+    </form>-->
+    <button (click)="createPost()"  *ngIf="userObj.type === 0" class="create-button"> <mat-icon>add</mat-icon> Add Auction </button>
+  
+  </div>
+  <div *ngIf="!postList.length" class="post-con no-post-con">
+    <p>There is no post.</p>
+  </div>
+  <div *ngIf="postList.length" class="post-con">
+    <div *ngFor="let item of postList" class="card-container">
+      <div class="content-con">
+        <div   (click)="showPostDialog(item)">
+        <img [src]="item.img[0]" alt="Image">
+        <mat-divider></mat-divider>
+        <tr>
+          <td><span class="row-title">Jade type:</span></td>
+          <td>{{item.gem_type}}</td>
+        </tr>
+        <tr>
+          <td><span class="row-title">Item type:</span></td>
+          <td>{{item.item_type}}</td>
+        </tr>
+        <tr>
+          <td><span class="row-title">Last price:</span></td>
+          <td>{{item.auction_price}}</td>
+        </tr>
+        </div>
+        <mat-divider></mat-divider>
+        <div>
+          <div class="auction-con" *ngIf="!item.email_done">
+            <span>Time remaining: {{ item.created_at | countdown | async }}</span>
+            <mat-form-field floatLabel="always">
+                <mat-label>Auction price</mat-label>
+                <input matInput type="number" (change)="changeAucPriceFn($event)" class="example-right-align" value="{{item.auction_price}}">
+                <span matTextPrefix>MMK&nbsp;</span>
+              </mat-form-field>
+              <span *ngIf="userObj.type === 1">
+                <button (click)="updateAucPrice(item)">participate</button> 
+            </span>
+          </div>
+        </div>
+        <div class="home-btn-con">
+          <a mat-button *ngIf="userObj.type === 0"
+            class="home-btn" (click)="editPost(item)"> <mat-icon>edit</mat-icon> </a>
+          <a mat-button *ngIf="userObj.type === 0"
+            class="home-btn delete-btn" (click)="deletePost(item.id)"> <mat-icon>delete</mat-icon> </a>
+        </div>
+      </div>
+    </div>
+  </div>

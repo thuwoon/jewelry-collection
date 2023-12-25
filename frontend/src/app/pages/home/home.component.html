@@ -1,0 +1,46 @@
+<div class="post-btn-con">
+  <form [formGroup]="searchForm" class="search-form-con">
+    <select class="classic-select" formControlName="gem_type">
+      <option value=''> Select Gem Type </option>
+      <option *ngFor="let type of gemTypes" [value]="type.name">{{type.name}}</option>
+    </select>
+
+    <select class="classic-select" formControlName="item_type">
+      <option value=''> Select Item Type </option>
+      <option *ngFor="let type of itemTypes" [value]="type.name">{{type.name}}</option>
+    </select>
+    
+    <button  [disabled]="searchForm.invalid"
+      class="cancle-btn filter-btn" (click)="onCancle()"> <mat-icon>restart_alt</mat-icon> </button>
+
+    <button [disabled]="searchForm.invalid" class="filter-btn" (click)="onSearchPost()"> <mat-icon>search</mat-icon>
+    </button>
+
+  </form>
+  <!-- <button (click)="sendEvent()">Send Event</button>
+    <div>{{ receivedData }}</div> -->
+  <button (click)="editPost()"  *ngIf="userObj.type === 0" class="create-button"> <mat-icon>note_add</mat-icon></button>
+
+  <!-- <p>{{receivedData}}</p> -->
+</div>
+<div *ngIf="!postList.length" class="post-con no-post-con">
+  <p>There is no post.</p>
+</div>
+<div *ngIf="postList.length" class="post-con">
+  <div *ngFor="let item of postList" class="card-container" >
+    <div class="content-con">
+      <div (click)="showPostDialog(item)">
+      <img [src]="item.img[0]" alt="Image">
+      <p class="gem-info">{{ item.gem_type }}</p>
+      <p class="gem-info">{{ item.item_type }}</p>
+      <p class="gem-info">{{ item.price }}</p>
+      </div>
+      <div class="home-btn-con">
+        <a mat-button *ngIf="userObj.type === 0"
+          class="home-btn" (click)="editPost(item)"> <mat-icon>edit</mat-icon></a>
+        <a mat-button *ngIf="userObj.type === 0"
+          class="home-btn delete-btn" (click)="deletePost(item.id)"><mat-icon>delete</mat-icon> </a>
+      </div>
+    </div>
+  </div>
+</div>

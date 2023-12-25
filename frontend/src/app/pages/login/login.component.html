@@ -1,0 +1,67 @@
+<div class="login-sec-con">
+  <!-- <div class="login-left-con"> -->
+
+
+  <div class="title-con">
+    <h1> Jade Spark </h1>
+    <div class="h2-con">
+      <p> Jewelry Collection </p>
+    </div>
+  </div>
+  <section class='login' id='login'>
+    <div class='head'>
+      <h1 class='company'>Login</h1>
+    </div>
+    <p class='msg'>Happy to have you here!</p>
+    <div class='form'>
+      
+      <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+        <div class="email-con">
+          <input type="text" placeholder='Email' class='text' id='username' required formControlName="email"><br>
+          <p
+            *ngIf="loginForm.get('email')?.hasError('invalidEmail') && !loginForm.get('email')?.hasError('required')">
+            Invalid email format
+          </p>
+        </div>
+        <div class="pwd-con">
+          <input type="password" placeholder='Password' class='password' required formControlName="password"><br>
+          
+        </div>
+        <button class='btn-login' [disabled]="loginForm.invalid" type="submit" id='do-login'>Log in</button>
+        <a class='forgot' (click)="forgetPw()" >Forgot password?</a>
+      </form>
+    </div>
+  </section>
+  <!-- <div class="login-container">
+      <h2>Login</h2>
+      <form [formGroup]="loginForm" (ngSubmit)="onLogin()" class="login-form-con">
+        <mat-form-field>
+          <mat-label>Email</mat-label>
+          <input matInput placeholder="Enter your email" formControlName="email">
+          <mat-error *ngIf="loginForm.get('email')?.hasError('required')">
+            Email is required
+          </mat-error>
+          <mat-error
+            *ngIf="loginForm.get('email')?.hasError('invalidEmail') && !loginForm.get('email')?.hasError('required')">
+            Invalid email format
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field >
+          <mat-label>Password</mat-label>
+          <input matInput type="password" placeholder="Enter your password" formControlName="password">
+          <mat-error *ngIf="loginForm.get('password')?.hasError('required')">
+            Password is required
+          </mat-error>
+        </mat-form-field>
+        <button type="submit" [disabled]="loginForm.invalid" class="login-button">Login</button>
+      </form>
+    </div> -->
+  <p class="signup">Do not have an account? </p>
+  <p><a class="register-link" (click)="openRegister()">Sign up</a></p>
+
+  <!-- </div> -->
+
+  <!-- <div class="login-right-con">
+
+  </div> -->
+</div>

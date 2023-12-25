@@ -1,0 +1,27 @@
+<nav class="navbar-container">
+    <!--<div class="left-con">-->
+        <div class="logo">
+            <!-- <img src="assets/homeLogo.png" alt="Logo"> -->
+            <h1 class="nav-title"> Jade Spark </h1>
+        </div>
+        <div>
+            <a class="nav-btn" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Showcase</a>
+            <a class="nav-btn" routerLink="/users" *ngIf="checkAdmin()" routerLinkActive="active">Customers</a>
+            <a class="nav-btn" (click)="editUser()"  routerLinkActive="active">Profile</a>
+            <a class="nav-btn" routerLink="/auctions" *ngIf="checkPermission()"  routerLinkActive="active">Auctions</a>
+
+        </div>
+
+    <!--</div>-->
+
+    <div class="right-con">
+        <button routerLink="/login" class="logout-btn" (click)="logout()" routerLinkActive="active">Log out</button>
+        <!-- <input id="checkbox2" type="checkbox">
+        <label class="toggle toggle2" for="checkbox2">
+            <div id="bar4" class="bars"></div>
+            <div id="bar5" class="bars"></div>
+            <div id="bar6" class="bars"></div>
+        </label> -->
+
+    </div>
+</nav>

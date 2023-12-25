@@ -1,0 +1,89 @@
+<div class="reg-page-con">
+
+    <div class="register-container">
+        <div class="title-con">
+            <h1 *ngIf="!userId">Sing Up</h1>
+            <h1 *ngIf="userId">Profile</h1>
+        </div>
+        <form [formGroup]="registrationForm" class="login-form-con">
+            <mat-form-field appearance="outline">
+                <mat-label>Username</mat-label>
+                <input matInput placeholder="Enter your username" formControlName="username">
+                <mat-icon matSuffix style="color:lightgreen">person</mat-icon>
+                <mat-error *ngIf="registrationForm.get('username')?.hasError('required')">
+                    Username is required
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+                <mat-label>Email</mat-label>
+                <input matInput placeholder="Enter your email" formControlName="email">
+                <mat-icon matSuffix style="color:lightgreen">contact_mail</mat-icon>
+                <mat-error *ngIf="registrationForm.get('email')?.hasError('required')">
+                    Email is required
+                </mat-error>
+                <mat-error
+                    *ngIf="!registrationForm.get('email')?.hasError('required') && registrationForm.get('email')?.hasError('invalidEmail')">
+                    Invalid email format
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field >
+                <mat-label>User Type</mat-label>
+                <mat-select formControlName="type" >
+                  <mat-option *ngFor="let type of userTypes" [value]="type.id">
+                    {{type.name}}
+                  </mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+                <mat-label>Address</mat-label>
+                <input matInput placeholder="Enter your address" formControlName="address">
+                <mat-icon matSuffix style="color:lightgreen">home</mat-icon>
+                <mat-error *ngIf="registrationForm.get('address')?.hasError('required')">
+                    Address is required
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+                <mat-label>Phone</mat-label>
+                <input matInput placeholder="Enter your phone number" formControlName="phone">
+                <mat-icon matSuffix style="color:lightgreen">contact_phone</mat-icon>
+                <mat-error *ngIf="registrationForm.get('phone')?.hasError('required')">
+                    Phone number is required
+                </mat-error>
+                <mat-error
+                    *ngIf="!registrationForm.get('phone')?.hasError('required') && registrationForm.get('phone')?.hasError('invalidPhone')">
+                    Phone number must be exactly 11 digits
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+                <mat-label>Password</mat-label>
+                <input matInput type="password" placeholder="Enter your password" formControlName="password">
+                <mat-icon matSuffix style="color:lightgreen">password</mat-icon>
+                <mat-error *ngIf="registrationForm.get('password')?.hasError('required')">
+                    Password is required
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+                <mat-label>Confirm Password</mat-label>
+                <input matInput type="password" placeholder="Confirm your password" formControlName="confirmPassword">
+                <mat-icon matSuffix style="color:lightgreen">password</mat-icon>
+                <mat-error *ngIf="registrationForm.get('confirmPassword')?.hasError('required')">
+                    Confirm Password is required
+                </mat-error>
+                <mat-error *ngIf="registrationForm.get('confirmPassword')?.hasError('mismatch')">
+                    Passwords do not match
+                </mat-error>
+            </mat-form-field>
+
+            <button type="submit" *ngIf="!userId" [disabled]="registrationForm.invalid" class="login-button"
+                (click)="createUser()">Register</button>
+            <button type="submit" *ngIf="userId" [disabled]="registrationForm.invalid" class="login-button"
+                (click)="updateUser(userId)"> Update </button>
+        </form>
+    </div>
+</div>

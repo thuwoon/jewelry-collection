@@ -1,0 +1,128 @@
+<!-- <h2 mat-dialog-title *ngIf="!postData">Post Create</h2>
+<h2 mat-dialog-title *ngIf="postData">Post Update</h2> -->
+<form [formGroup]="postForm" class="postForm-con">
+  <mat-dialog-content>
+    <div  class="post-input-con" *ngIf="postData && !postData.isAuction">
+      <mat-checkbox formControlName="reserved">Reserved</mat-checkbox>
+    </div>
+    <div class="post-input-con">
+      <!-- <mat-form-field appearance="outline">
+        <mat-label>Item Type</mat-label>
+        <input matInput placeholder="Enter item type" formControlName="jade_type">
+      </mat-form-field> -->
+      <mat-form-field >
+        <mat-label>Gem Type</mat-label>
+        <mat-select formControlName="gem_type" >
+          <mat-option *ngFor="let type of jadeTypes" [value]="type.name">
+            {{type.name}}
+          </mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    </div>
+
+    <div class="post-input-con">
+      <!-- <mat-form-field appearance="outline">
+        <mat-label>Item Type</mat-label>
+        <input matInput placeholder="Enter item type" formControlName="jade_type">
+      </mat-form-field> -->
+      <mat-form-field >
+        <mat-label>Item Type</mat-label>
+        <mat-select formControlName="item_type" >
+          <mat-option *ngFor="let type of itemTypes" [value]="type.name">
+            {{type.name}}
+          </mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    </div>
+
+    
+
+    <div class="post-input-con">
+      <mat-form-field appearance="outline">
+        <mat-label>Color</mat-label>
+        <input matInput placeholder="Enter item color" formControlName="color">
+      </mat-form-field>
+    </div>
+
+    <div class="post-input-con">
+      <mat-form-field appearance="outline">
+        <mat-label> Transparency </mat-label>
+        <input matInput placeholder="Enter item transparency" formControlName="transparency">
+      </mat-form-field>
+    </div>
+
+    <div class="post-input-con">
+      <mat-form-field appearance="outline">
+        <mat-label>Shape</mat-label>
+        <input matInput placeholder="Enter item shape" formControlName="shape">
+      </mat-form-field>
+    </div>
+
+    <div class="post-input-con">
+      <mat-form-field appearance="outline">
+        <mat-label>Weight</mat-label>
+        <input matInput placeholder="Enter item weight" formControlName="weight">
+      </mat-form-field>
+    </div>
+
+    <div class="post-input-con">
+      <mat-form-field appearance="outline">
+        <mat-label>Origin</mat-label>
+        <input matInput placeholder="Enter item origin" formControlName="origin">
+      </mat-form-field>
+    </div>
+
+    <div class="post-input-con">
+      <mat-form-field appearance="outline">
+        <mat-label>Price</mat-label>
+        <input matInput placeholder="Enter item price" formControlName="price">
+      </mat-form-field>
+    </div>
+
+    <div class="post-input-con">
+      <mat-form-field appearance="outline">
+        <mat-label>Description</mat-label>
+        <input matInput placeholder="Enter item description" formControlName="description">
+      </mat-form-field>
+    </div>
+
+    <div class="post-input-con">
+      <mat-form-field appearance="outline">
+        <mat-label>Item Code</mat-label>
+        <input matInput placeholder="Enter item code" formControlName="item_code">
+      </mat-form-field>
+    </div>
+
+    <!-- <div class="post-input-con input-img-con">
+      <input type="file" accept="image/*" (change)="onImageChange($event)" id="fileInput">
+      <label class="file-input-label" for="fileInput">Choose Image</label>
+      <div class="image-preview-container" *ngIf="selectedImage">
+        <img class="image-preview" [src]="selectedImage" alt="Preview">
+      </div>
+    </div> -->
+    <div class="post-input-con input-img-con">
+      <input type="file" accept="image/*" (change)="onImageChange($event)" id="fileInput">
+      <label class="file-input-label" for="fileInput" *ngIf="imageList.length<3"> <mat-icon>image</mat-icon><mat-icon>add</mat-icon></label>
+      <!-- <div class="image-preview-container"  *ngIf="selectedImage">
+        <img class="image-preview" [src]="selectedImage" alt="Preview">
+      </div> -->
+
+      <div class="image-preview-container"  *ngIf="imageList">
+        <div class="image-container" *ngFor="let eachImage of imageList; let i = index ">
+          <i  (click)="removeImg(i)"><mat-icon>cancel</mat-icon></i>
+          <img class="image-preview"  [src]="eachImage" alt="Preview">
+        </div>
+      </div>
+    </div>
+  </mat-dialog-content>
+</form>
+
+<mat-dialog-actions>
+  <button mat-button class="btn-con cancle-btn" (click)="onCancel()">Cancel</button>
+  <button mat-button color="primary" *ngIf="postData && !postData.id" class="btn-con upload-btn"
+    (click)="onCreatePost()">Create</button>
+  <button mat-button color="primary" *ngIf="postData && postData.id" class="btn-con upload-btn"
+    (click)="updatePost()">Update</button>
+</mat-dialog-actions>

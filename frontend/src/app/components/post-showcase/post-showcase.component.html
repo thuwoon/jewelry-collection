@@ -1,0 +1,79 @@
+<h2 mat-dialog-title class="dialog-title">Item Information</h2>
+<mat-dialog-content>
+<div class="dialog-content">
+  <div  *ngIf="postData.reserved">
+    <label class="input-label reserved">This item is reserved!</label>
+  </div>
+
+  <div class="post-input-con">
+    <label class="input-label">Gem Type:</label>
+    <p class="input-text">{{ postData.gem_type }}</p>
+  </div>
+
+  <div class="post-input-con">
+    <label class="input-label">Item Type:</label>
+    <p class="input-text">{{ postData.item_type }}</p>
+  </div>
+
+  <div class="post-input-con">
+    <label class="input-label">Color:</label>
+    <p class="input-text">{{ postData.color }}</p>
+  </div>
+
+  <div class="post-input-con">
+    <label class="input-label">Transparency:</label>
+    <p class="input-text">{{ postData.transparency }}</p>
+  </div>
+
+  <div class="post-input-con">
+    <label class="input-label">Shape:</label>
+    <p class="input-text">{{ postData.shape }}</p>
+  </div>
+
+  <div class="post-input-con">
+    <label class="input-label">Weight:</label>
+    <p class="input-text">{{ postData.weight }}</p>
+  </div>
+
+  <div class="post-input-con">
+    <label class="input-label">Origin:</label>
+    <p class="input-text">{{ postData.origin }}</p>
+  </div>
+
+  <div class="post-input-con">
+    <label class="input-label">Price:</label>
+    <p class="input-text">{{ postData.price }}</p>
+  </div>
+
+  <div class="post-input-con">
+    <label class="input-label">Description:</label>
+    <p class="input-text">{{ postData.description }}</p>
+  </div>
+
+  <div class="post-input-con">
+    <label class="input-label">Item Code:</label>
+    <p class="input-text">{{ postData.item_code }}</p>
+  </div>
+
+  <div class="post-input-con">
+    <label class="input-label">Contact Number:</label>
+    <p class="input-text">{{ contactNum }}</p>
+  </div>
+
+  <!-- <div class="post-input-con">
+    <div class="image-preview-container" *ngIf="selectedImage">
+      <img class="image-preview" [src]="selectedImage" alt="Preview">
+    </div>
+  </div> -->
+
+  <div class="post-input-con">
+    <!-- <label class="input-label">Image:</label> -->
+    <div class="image-preview-container" *ngIf="imageList">
+      <div *ngFor="let eachImage of imageList ">
+        <img class="image-preview"  [src]="eachImage" alt="Preview">
+      </div>
+      <!-- <img class="image-preview" [src]="selectedImage" alt="Preview"> -->
+    </div>
+  </div>
+</div>
+</mat-dialog-content>
